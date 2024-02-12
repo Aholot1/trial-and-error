@@ -18,7 +18,9 @@ void        DestroyNode(LinkedList* Node);
 void        InsertAfterNode(LinkedList** Head, LinkedList* NewNode);
 LinkedList* SearchNode(LinkedList** Head, int index);
 
-void        PrintList(LinkedList **Head);
-
-
+void        PrintList(LinkedList** Head);
+LinkedList* Top(LinkedList** Head);
+void        CleanList(LinkedList** Head);
+int ReMoveNode(LinkedList** Head, LinkedList* Remove);
+int         IsEmpty(LinkedList** Head);
 #endif

@@ -57,3 +57,48 @@ void PrintList(LinkedList** Head) {
         }
     }
 }
+
+LinkedList* Top(LinkedList** Head) {
+    return *Head;
+}
+
+void CleanList(LinkedList** Head) {
+    LinkedList* Current = *Head;
+    LinkedList* Remove = Current;
+    while (Current != NULL) {
+        Remove = Current;
+        Current = Current->NextNode;
+
+        DestroyNode(Remove);
+
+    }
+    *Head = NULL;
+}
+
+int ReMoveNode(LinkedList** Head, LinkedList* Remove) {
+    LinkedList* Current = *Head;
+
+    if ((*Head) == Remove) {
+        (*Head)->NextNode = NULL;
+        return Remove->Data;
+    }
+
+    while (Current->NextNode != Remove) {
+        Current = Current->NextNode;
+    }
+
+    Current->NextNode = Remove->NextNode;
+    Remove->NextNode = NULL;
+
+    return Remove->Data;
+
+
+
+}
+
+int IsEmpty(LinkedList** Head) {// empty is 1, not empty is 0;
+    if ((*Head) == NULL) {
+        return 1;
+    }
+    return 0;
+}

@@ -11,4 +11,12 @@ int main(void) {
     NewNode = CreateNode(90);
     InsertAfterNode(&List, NewNode);
     PrintList(&List);
+    printf("%d\n", IsEmpty(&List));
+
+    CleanList(&List);
+    printf("%d\n", IsEmpty(&List));
+    DestroyNode(List);
+
+    return 0;
+
 }
