@@ -14,7 +14,7 @@ void DestroyNode(LinkedList* NewNode) {
     free(NewNode);
 }
 
-void InsertAfterNode(LinkedList** Head, LinkedList* NewNode) {
+void NodeAdd(LinkedList** Head, LinkedList* NewNode) {
     if ((*Head)->NextNode == NULL) {
         (*Head)->NextNode = NewNode;
     }
@@ -35,12 +35,19 @@ LinkedList* SearchNode(LinkedList** Head, int index) {
     }
     else {
 
-        for (int i = 0; i <= index; i++) {
+        for (int i = 0; i < index; i++) {
             Node = Node->NextNode;
         }
     }
 
     return Node;
+}
+void InsertAfterNode(LinkedList* Current, LinkedList* Add){
+    Add->NextNode = Current->NextNode;
+    Current->NextNode = Add;
+    
+
+
 }
 
 void PrintList(LinkedList** Head) {

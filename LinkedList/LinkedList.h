@@ -15,12 +15,16 @@ LinkedList* CreateNode(int NewData);
 void        DestroyNode(LinkedList* Node);
 
 
-void        InsertAfterNode(LinkedList** Head, LinkedList* NewNode);
+void        NodeAdd(LinkedList** Head, LinkedList* NewNode);
 LinkedList* SearchNode(LinkedList** Head, int index);
-
+void        InsertAfterNode(LinkedList* Current, LinkedList *Add);
 void        PrintList(LinkedList** Head);
 LinkedList* Top(LinkedList** Head);
 void        CleanList(LinkedList** Head);
 int ReMoveNode(LinkedList** Head, LinkedList* Remove);
 int         IsEmpty(LinkedList** Head);
-#endif
+int         IsFull(LinkedList** Head);
+
+
+
+#endif//asfasfasdffsafsaf
