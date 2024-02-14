@@ -13,8 +13,10 @@ int main(void) {
     PrintList(&List);
     printf("%d\n", IsEmpty(&List));
 
-    CleanList(&List);
-    printf("%d\n", IsEmpty(&List));
+    LinkedList* Current = SearchNode(&List, 0);
+
+    printf("%d", Current->Data);
+    
     DestroyNode(List);
 
     return 0;
