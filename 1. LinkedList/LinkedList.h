@@ -24,7 +24,7 @@ void        SLL_CleanList(LinkedList** Head);
 int         SLL_ReMoveNode(LinkedList** Head, LinkedList* Remove);
 int         SLL_IsEmpty(LinkedList** Head);
 int         SLL_IsFull(LinkedList** Head);
-void        SLL_InsertBeforeNode(LinkedList* Current, LinkedList* Add);
+void        SLL_InsertBeforeNode(LinkedList** Head, LinkedList* Current, LinkedList* Add);
 
 
 #endif//asfasfasdffsafsaf
