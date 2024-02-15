@@ -76,7 +76,7 @@ void SLL_CleanList(LinkedList** Head) {
         Remove = Current;
         Current = Current->NextNode;
 
-        DestroyNode(Remove);
+        SLL_DestroyNode(Remove);
 
     }
     *Head = NULL;
