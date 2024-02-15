@@ -2,7 +2,7 @@
 //기본연산 : 삽입, 삭제, 검색, 연결, 역순, 길이체크, 접근, 정렬 
 #include "LinkedList.h"
 
-LinkedList* CreateNode(int NewData) { //노드 생성
+LinkedList* SLL_CreateNode(int NewData) { //노드 생성
     LinkedList* NewNode = (LinkedList*)malloc(sizeof(LinkedList));
     NewNode->Data = NewData;
     NewNode->NextNode = NULL;
@@ -10,11 +10,11 @@ LinkedList* CreateNode(int NewData) { //노드 생성
 
 }
 
-void DestroyNode(LinkedList* NewNode) {
+void SLL_DestroyNode(LinkedList* NewNode) {
     free(NewNode);
 }
 
-void NodeAdd(LinkedList** Head, LinkedList* NewNode) {
+void SLL_NodeAdd(LinkedList** Head, LinkedList* NewNode) {
     if ((*Head)->NextNode == NULL) {
         (*Head)->NextNode = NewNode;
     }
@@ -28,7 +28,7 @@ void NodeAdd(LinkedList** Head, LinkedList* NewNode) {
         Tail->NextNode = NewNode;
     }
 }
-LinkedList* SearchNode(LinkedList** Head, int index) {
+LinkedList* SLL_SearchNode(LinkedList** Head, int index) {
     LinkedList* Node = (*Head);
     if (*Head == NULL) {
         return 0;
@@ -42,7 +42,7 @@ LinkedList* SearchNode(LinkedList** Head, int index) {
 
     return Node;
 }
-void InsertAfterNode(LinkedList* Current, LinkedList* Add){
+void SLL_InsertAfterNode(LinkedList* Current, LinkedList* Add){
     Add->NextNode = Current->NextNode;
     Current->NextNode = Add;
     
@@ -50,7 +50,7 @@ void InsertAfterNode(LinkedList* Current, LinkedList* Add){
 
 }
 
-void PrintList(LinkedList** Head) {
+void SLL_PrintList(LinkedList** Head) {
 
     LinkedList* ImsiNode = *Head;
 
@@ -65,11 +65,11 @@ void PrintList(LinkedList** Head) {
     }
 }
 
-LinkedList* Top(LinkedList** Head) {
+LinkedList* SLL_Top(LinkedList** Head) {
     return *Head;
 }
 
-void CleanList(LinkedList** Head) {
+void SLL_CleanList(LinkedList** Head) {
     LinkedList* Current = *Head;
     LinkedList* Remove = Current;
     while (Current != NULL) {
@@ -82,7 +82,7 @@ void CleanList(LinkedList** Head) {
     *Head = NULL;
 }
 
-int ReMoveNode(LinkedList** Head, LinkedList* Remove) {
+int SLL_ReMoveNode(LinkedList** Head, LinkedList* Remove) {
     LinkedList* Current = *Head;
 
     if ((*Head) == Remove) {
@@ -103,9 +103,20 @@ int ReMoveNode(LinkedList** Head, LinkedList* Remove) {
 
 }
 
-int IsEmpty(LinkedList** Head) {// empty is 1, not empty is 0;
+int SLL_IsEmpty(LinkedList** Head) {// empty is 1, not empty is 0;
     if ((*Head) == NULL) {
         return 1;
     }
     return 0;
+}
+
+void SLL_InsertBeforeNode(LinkedList** Head,LinkedList* Current, LinkedList* Add){
+    LinkedList* BeforeNode = *Head;
+    while(BeforeNode->NextNode != Current){
+        BeforeNode = BeforeNode->NextNode;
+    }
+    Add->NextNode = BeforeNode->NextNode;
+    BeforeNode->NextNode = Add;
+
+
 }
