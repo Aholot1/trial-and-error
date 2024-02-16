@@ -1,7 +1,7 @@
 #include "DoubleLinkedList.h"
 
-Node* DLL_CreateNode(int DLL_NewData){ // 노드 생성
-    Node* NewNode = (Node*)malloc(sizeof(int));
+Node* DLL_CreateNode(int DLL_NewData) { // 노드 생성
+    Node* NewNode = (Node*)malloc(sizeof(Node));
     NewNode->NextNode = NULL;
     NewNode->BackNode = NULL;
     NewNode->Data = DLL_NewData;
@@ -9,46 +9,58 @@ Node* DLL_CreateNode(int DLL_NewData){ // 노드 생성
     return NewNode;
 }
 
-void  DLL_DestroyNode(Node* Remove){
+void  DLL_DestroyNode(Node* Remove) {
     free(Remove);
 }
 
 
-void DLL_AddNode(Node** Head, Node* NewNode){
-    if((*Head) == NULL){
+void DLL_AddNode(Node** Head, Node* NewNode) {
+    if ((*Head) == NULL) {
         *Head = NewNode;
     }
-    else{
-        (*Head)->NextNode = NewNode;
-        NewNode->BackNode = (*Head);
+    else {
+        Node* Tail = *Head;
+
+        while (Tail->NextNode != NULL) {
+            Tail = Tail->NextNode;
+        }
+        Tail->NextNode = NewNode;
+        NewNode->BackNode = Tail;
 
     }
 }
 
-void DLL_InsertAfterNode(Node* Current, Node* NewNode){
-    Current->NextNode->BackNode = NewNode;
-    NewNode->BackNode = Current;
-    NewNode->NextNode = Current->NextNode;
-    Current->NextNode = NewNode;
-    
+void DLL_InsertAfterNode(Node* Current, Node* NewNode) {
+    if (Current->NextNode == NULL) {
+        Current->NextNode = NewNode;
+        NewNode->BackNode = Current;
+    }
+    else {
+        NewNode->NextNode = Current->NextNode;
+        Current->NextNode->BackNode = NewNode;
+        Current->NextNode = NewNode;
+        NewNode->BackNode = Current;
+        
+    }
+
 }
 
-void DLL_InsertBeforeNode(Node* Current, Node* NewNode){
+void DLL_InsertBeforeNode(Node* Current, Node* NewNode) {
     NewNode->BackNode = Current->BackNode;
     Current->BackNode = NewNode;
     NewNode->BackNode->NextNode = NewNode;
     NewNode->NextNode = Current;
 }
 
-void DLL_RemoveNode(Node** Head, Node* Remove){
+void DLL_RemoveNode(Node** Head, Node* Remove) {
     Node* Current = *Head;
-    while(Current->NextNode != Remove){
+    while (Current->NextNode != Remove) {
         Current = Current->NextNode;
     }
-    if(Current == *Head){
+    if (Current == *Head) {
         *Head = (*Head)->NextNode;
     }
-    else{
+    else {
         Current->BackNode->NextNode = Current->NextNode;
         Current->NextNode->BackNode = Current->BackNode;
         Current->NextNode = NULL;
@@ -56,10 +68,10 @@ void DLL_RemoveNode(Node** Head, Node* Remove){
     }
 }
 
-void DLL_CleanList(Node** Head){
+void DLL_CleanList(Node** Head) {
     Node* Current = *Head;
     Node* Remove = Current;
-    while(Current != NULL){
+    while (Current != NULL) {
         Remove = Current;
         Current->NextNode->BackNode = NULL;
         Current->NextNode = NULL;
@@ -71,10 +83,10 @@ void DLL_CleanList(Node** Head){
 
 
 
-Node* DLL_SearchNode(Node** Head, int index){
+Node* DLL_SearchNode(Node** Head, int index) {
     Node* ReturnNode = (*Head);
 
-    for(int i = 0; i<index; i++){
+    for (int i = 0; i < index; i++) {
         ReturnNode = ReturnNode->NextNode;
     }
 
@@ -82,32 +94,33 @@ Node* DLL_SearchNode(Node** Head, int index){
 
 }
 
-Node* DLL_Top(Node** Head){
+Node* DLL_Top(Node** Head) {
     return (*Head);
 }
 
-Node* DLL_Tail(Node** Head){
+Node* DLL_Tail(Node** Head) {
     Node* Current = *Head;
 
-    while(Current->NextNode != NULL){
+    while (Current->NextNode != NULL) {
         Current = Current->NextNode;
     }
 
     return Current;
 }
 
-void DLL_PrintList(Node** Head){
+void DLL_PrintList(Node** Head) {
 
     Node* Current = *Head;
 
-    while(Current->NextNode != NULL){
+    while (Current != NULL) {
         printf("%d\n", Current->Data);
+        Current = Current->NextNode;
     }
 
 }
 
-int IsEmpty(Node** Head){
-    if((*Head) == NULL){
+int IsEmpty(Node** Head) {
+    if ((*Head) == NULL) {
         return 1;
     }
 
