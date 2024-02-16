@@ -5,8 +5,8 @@
 #include <stdlib.h>
 
 typedef struct TagNode{
-    TagNode* BackNode;
-    TagNode* NextNode;
+    struct TagNode* BackNode;
+    struct TagNode* NextNode;
     int Data;
 } Node;
 
@@ -29,7 +29,7 @@ Node*   DLL_Tail(Node** Head);
 void  DLL_PrintList(Node** Head);
 
 int   IsEmpty(Node** Head);
-int   IsFull(Node** Head);
+
 
 
 
