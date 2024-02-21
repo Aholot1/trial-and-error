@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct TagNode{
+typedef struct TagNode {
     struct TagNode* BackNode;
     struct TagNode* NextNode;
     int Data;
@@ -23,8 +23,8 @@ void  DLL_RemoveNode(Node** Head, Node* Remove);
 void  DLL_CleanList(Node** Head);
 
 Node* DLL_SearchNode(Node** Head, int index);
-Node*   DLL_Top(Node** Head);
-Node*   DLL_Tail(Node** Head);
+Node* DLL_Top(Node** Head);
+Node* DLL_Tail(Node** Head);
 
 void  DLL_PrintList(Node** Head);
 

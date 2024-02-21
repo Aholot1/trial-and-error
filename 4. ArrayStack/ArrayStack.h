@@ -3,16 +3,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef int ElementType;
+
 typedef struct TagNode{
-    int Data;
+    ElementType Data;
 } Node;
 
 typedef struct tagArrayStack{
-    int   Capacity;
-    int   Top;
-    Node* Nodes;
+    ElementType   Capacity;
+    ElementType   Top;
+    Node*         Nodes;
 } ArrayStack;
 
-void AS_CreateStack(ArrayStack** Stack, int Capacity);
-
+void         AS_CreateStack(ArrayStack** Stack, ElementType Capacity);
+void         AS_DestroyStack(ArrayStack* Stack);
+void         AS_Push(ArrayStack* Stack, ElementType Data);
+ElementType  AS_Pop(ArrayStack* Stack);
 #endif
