@@ -1,15 +1,21 @@
 #include "LinkedListStack.h"
 
-LLS_CreateStack(LinkedListStack** Stack){
+void LLS_CreateStack(LinkedListStack** Stack) {
     (*Stack)       = (LinkedListStack*)malloc(sizeof(LinkedListStack));
     (*Stack)->List = NULL;
     (*Stack)->Top  = NULL;
 }
 
-void LLS_DestroyStack(LinkedListStack** Stack){
-    
+void LLS_DestroyStack(LinkedListStack* Stack) {
+    if (!LLS_IsEmpty(Stack)) {
+
+        free(LLS_Pop(Stack));
+
+    }
+    free(Stack);
+
 }
-Node* LLS_CreateNode(char* Data){
+Node* LLS_CreateNode(char* Data) {
     Node* _Node = (Node*)malloc(sizeof(Node));
     _Node->Data = (char*)malloc(sizeof(strlen(Data) + 1));// 길이 + 널문자 용량
 
@@ -18,65 +24,72 @@ Node* LLS_CreateNode(char* Data){
 
     return _Node;
 }
-void LLS_DestroyNode(Node* _Node){
+void LLS_DestroyNode(Node* _Node) {
     free(_Node->Data);
     free(_Node);
 }
 
-void LLS_Push(LinkedListStack* Stack, Node* NewNode){
-    if(Stack == NULL){
+void LLS_Push(LinkedListStack* Stack, Node* NewNode) {
+
+    if (Stack->List == NULL) {
+
         Stack->List = NewNode;
-        Stack->Top = NewNode;
+        
     }
-    else{
+    else {
+
         Stack->Top->NextNode = NewNode;
-        Stack->Top = NewNode;
+        
     }
+
+    Stack->Top = NewNode;
+
 }
-Node* LLS_Pop(LinkedListStack* Stack){
+Node* LLS_Pop(LinkedListStack* Stack) {
 
     Node* NodeTop = Stack->Top;
 
-    if(Stack->List == Stack->Top){
+    if (Stack->List == Stack->Top) {
 
         Stack->Top = NULL;
 
         Stack->List = NULL;
 
     }
-    else{
+    else {
 
         Node* Current = Stack->List;
 
-        while(Current != NULL && Current->NextNode != Stack->Top){
+        while (Current != NULL && Current->NextNode != Stack->Top) {
 
-        Current = Current->NextNode;
+            Current = Current->NextNode;
 
         }
 
         Stack->Top = Current;
 
         Stack->Top->NextNode = NULL;
-        
-        
+
+
     }
     return NodeTop;
 }
 
-Node* LLS_Top(LinkedListStack* Stack){
-    
+Node* LLS_Top(LinkedListStack* Stack) {
+
     return Stack->Top;
 }
-int   LLS_GetSize(LinkedListStack* Stack){
+int   LLS_GetSize(LinkedListStack* Stack) {
     int count = 0;
     Node* Current = Stack->List;
 
-    while(Current != NULL){
+    while (Current != NULL) {
         Current = Current->NextNode;
+        count++;
     }
 
     return count;
 }
-int   LLS_IsEmpty(LinkedListStack* Stack){
+int   LLS_IsEmpty(LinkedListStack* Stack) {
     return (Stack->List == NULL);
 }
